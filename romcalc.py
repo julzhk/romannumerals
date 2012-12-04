@@ -44,9 +44,26 @@ class RomanNumeral(object):
     def __gt__(self, other):
         return self.i > RomanNumeral(other).i
 
+    def __add__(self, other):
+        a = RomanNumeral(self)
+        a.i += other.i
+        a.r = self.int2roman(a.i)
+        return a
+
     def __iadd__(self, other):
         self.i += RomanNumeral(other).i
-        self.r = int2roman(self.i)
+        self.r = self.int2roman(self.i)
+        return self
+
+    def __sub__(self, other):
+        a = RomanNumeral(self)
+        a.i -= other.i
+        a.r = self.int2roman(a.i)
+        return a
+
+    def __isub(self, other):
+        self.i -= RomanNumeral(other).i
+        self.r = self.int2roman(self.i)
         return self
 
     def int2roman(self, x):

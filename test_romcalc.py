@@ -26,3 +26,30 @@ def test_CCIC():
 
 def test_CCXCIX():
     assert RomanNumeral('CCXCIX') == 299
+
+def test_IaddI():
+    a = RomanNumeral('I') + RomanNumeral('I')
+    assert a == 2 and a == 'II'
+
+def test_IiaddI():
+    a = RomanNumeral('I')
+    a += RomanNumeral('I')
+    assert a == 2 and a == 'II'
+
+def test_IXaddI():
+    a = RomanNumeral('IX') + RomanNumeral('I')
+    assert a == 10 and a == 'X'
+
+def test_IXiaddI():
+    a = RomanNumeral('IX')
+    a += RomanNumeral('I')
+    assert a == 10 and a == 'X'
+
+def test_XsubI():
+    a = RomanNumeral('X') - RomanNumeral('I')
+    assert a == 9 and a == 'IX'
+
+def test_XisubI():
+    a = RomanNumeral('X')
+    a -= RomanNumeral('I')
+    assert a == 9 and a == 'IX'
