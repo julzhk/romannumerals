@@ -12,26 +12,32 @@ class RomanNumeral(object):
 
     def __init__(self, r):
         self.r = r
-        self.i = r2i[r]
+        self.i = self.roman2int(r)
 
     def __eq__(self, other):
+        if isinstance(other, int):
+            return self.i == other
         return self.i == other.i
 
     def __lt__(self, other):
+        if isinstance(other, int):
+            return self.i < other
         return self.i < other.i
 
     def __gt__(self, other):
+        if isinstance(other, int):
+            return self.i > other
         return self.i > other.i
 
-def roman2int(r):
-    n = 0
-    current = RomanNumeral(r[0])
-    for c in r[1:]:
-        prev = current
-        current = RomanNumeral(c)
-        if current > prev:
-            n -= prev.i
-        else:
-            n += prev.i
-    n += current.i
-    return n
+    def roman2int(self, r):
+        n = 0
+        current = r2i[r[0]]
+        for c in r[1:]:
+            prev = current
+            current = r2i[c]
+            if current > prev:
+                n -= prev
+            else:
+                n += prev
+        n += current
+        return n
