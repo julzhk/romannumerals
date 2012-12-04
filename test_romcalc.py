@@ -22,7 +22,7 @@ def test_XXXIX():
     assert RomanNumeral('XXXIX') == 39
 
 def test_CCIC():
-    assert RomanNumeral('CCIC') == 299
+    assert RomanNumeral('CCIC').i == 299
 
 def test_CCXCIX():
     assert RomanNumeral('CCXCIX') == 299

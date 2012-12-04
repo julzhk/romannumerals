@@ -35,13 +35,19 @@ class RomanNumeral(object):
             self.i = n.i
 
     def __eq__(self, other):
-        return self.i == RomanNumeral(other).i
+        o = RomanNumeral(other)
+        return self.i == o.i and self.r == o.r
 
     def __lt__(self, other):
         return self.i < RomanNumeral(other).i
 
     def __gt__(self, other):
         return self.i > RomanNumeral(other).i
+
+    def __iadd__(self, other):
+        self.i += RomanNumeral(other).i
+        self.r = int2roman(self.i)
+        return self
 
     def int2roman(self, x):
         return ''.join(reversed([
