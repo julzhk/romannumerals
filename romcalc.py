@@ -8,26 +8,47 @@ r2i = {
         'M': 1000
         }
 
+thousands_looktable= {
+    0: ('', '', ''),
+    1: ('I', 'X', 'C'),
+    2: ('II', 'XX', 'CC'),
+    3: ('III','XXX','CCC' ),
+    4: ('IV', 'XL', 'CD'),
+    5: ('V', 'L', 'D'),
+    6: ('VI', 'LX', 'DC'),
+    7: ('VII', 'LXX', 'DCC'),
+    8: ('VIII', 'LXXX', 'DCCC'),
+    9: ('IX', 'XC', 'CM'),
+}
+
 class RomanNumeral(object):
 
-    def __init__(self, r):
-        self.r = r
-        self.i = self.roman2int(r)
+    def __init__(self, n):
+        if isinstance(n, int):
+            self.r = self.int2roman(n)
+            self.i = n
+        elif isinstance(n, str):
+            self.r = n
+            self.i = self.roman2int(n)
+        elif isinstance(n, RomanNumeral):
+            self.r = n.r
+            self.i = n.i
 
     def __eq__(self, other):
-        if isinstance(other, int):
-            return self.i == other
-        return self.i == other.i
+        return self.i == RomanNumeral(other).i
 
     def __lt__(self, other):
-        if isinstance(other, int):
-            return self.i < other
-        return self.i < other.i
+        return self.i < RomanNumeral(other).i
 
     def __gt__(self, other):
-        if isinstance(other, int):
-            return self.i > other
-        return self.i > other.i
+        return self.i > RomanNumeral(other).i
+
+    def int2roman(self, x):
+        return ''.join(reversed([
+            thousands_looktable[
+                int(digit)][power]
+                    for power, digit in enumerate(reversed(str(x)
+            ))]))
 
     def roman2int(self, r):
         n = 0

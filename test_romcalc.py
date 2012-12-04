@@ -23,3 +23,6 @@ def test_XXXIX():
 
 def test_CCIC():
     assert RomanNumeral('CCIC') == 299
+
+def test_CCXCIX():
+    assert RomanNumeral('CCXCIX') == 299
